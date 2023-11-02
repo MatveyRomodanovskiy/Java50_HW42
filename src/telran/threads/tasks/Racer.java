@@ -9,7 +9,7 @@ public class Racer implements Runnable, Comparable<Racer> {
 	static int minSleepTime = 2;
 	static int maxSleepTime = 4;
 	static Random random = new Random();
-	Instant timeStamp;
+	Instant finishTime;
 	
 	public Racer(String name, int distance) {
 		this.name = name;
@@ -20,8 +20,8 @@ public class Racer implements Runnable, Comparable<Racer> {
 	/**
 	 * @return the timeStamp
 	 */
-	public Instant getTimeStamp() {
-		return timeStamp;
+	public Instant getFinishTime() {
+		return finishTime;
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class Racer implements Runnable, Comparable<Racer> {
 				e.printStackTrace();
 			}
 		}	
-		this.timeStamp = Instant.now();
+		this.finishTime = Instant.now();
 //		Race.prizePlaces.add(name);
 	}
 
@@ -53,7 +53,7 @@ public class Racer implements Runnable, Comparable<Racer> {
 
 	@Override
 	public int compareTo(Racer o) {	
-		return this.timeStamp.compareTo(o.timeStamp);
+		return this.finishTime.compareTo(o.finishTime);
 	}
 
 	

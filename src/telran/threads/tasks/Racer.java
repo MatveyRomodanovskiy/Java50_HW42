@@ -35,7 +35,6 @@ public class Racer extends Thread implements Comparable<Racer> {
 				int sleepTime = minSleepTime + random.nextInt(maxSleepTime + 1 - minSleepTime);
 				Thread.sleep(sleepTime);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}	

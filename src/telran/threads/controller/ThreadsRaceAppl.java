@@ -30,10 +30,6 @@ public class ThreadsRaceAppl {
 		int[] operands = getOperands(io);
 		Race race = new Race(operands[0], operands[1]);
 		
-//		Thread[] threads = new Thread[race.getRacers().length];
-//		for (int i = 0; i < threads.length; i++) {
-//			threads[i] = new Thread(race.getRacers()[i]);
-//		}
 		for (int i = 0; i < race.getRacers().length; i++) {
 			race.getRacers()[i].start();
 		}

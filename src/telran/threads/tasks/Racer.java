@@ -39,7 +39,6 @@ public class Racer extends Thread implements Comparable<Racer> {
 			}
 		}	
 		this.finishTime = Instant.now();
-//		Race.prizePlaces.add(name);
 	}
 
 

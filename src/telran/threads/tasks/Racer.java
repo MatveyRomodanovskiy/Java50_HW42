@@ -1,14 +1,27 @@
 package telran.threads.tasks;
-import telran.threads.controller.Race;
 
+import java.time.Instant;
+import java.util.*;
 
-public class Racer implements Runnable {
+public class Racer implements Runnable, Comparable<Racer> {
 	private String name;
 	private int distance;
-
+	static int minSleepTime = 2;
+	static int maxSleepTime = 4;
+	static Random random = new Random();
+	Instant timeStamp;
+	
 	public Racer(String name, int distance) {
 		this.name = name;
 		this.distance = distance;
+		
+	}
+
+	/**
+	 * @return the timeStamp
+	 */
+	public Instant getTimeStamp() {
+		return timeStamp;
 	}
 
 	@Override
@@ -19,14 +32,28 @@ public class Racer implements Runnable {
 				System.out.println(name + ", finished " + (i + 1) + " loop ");
 			}
 			try {
-				int delay = 2 + (int) (Math.random() * 4);
-				Thread.sleep(delay);
+				int sleepTime = minSleepTime + random.nextInt(maxSleepTime + 1 - minSleepTime);
+				Thread.sleep(sleepTime);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}	
-		Race.prizePlaces.add(name);
+		this.timeStamp = Instant.now();
+//		Race.prizePlaces.add(name);
+	}
+
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public int compareTo(Racer o) {	
+		return this.timeStamp.compareTo(o.timeStamp);
 	}
 
 	

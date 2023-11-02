@@ -1,24 +1,21 @@
 package telran.threads.tasks;
+import telran.threads.controller.Race;
 
-import java.util.ArrayList;
 
-
-public class Race implements Runnable {
+public class Racer implements Runnable {
 	private String name;
-	private int max;
-	private static int prizePlace = 0;
-	public static ArrayList<String> prizePlaces = new ArrayList<>();
-	
-	public Race(String name, int max) {
+	private int distance;
+
+	public Racer(String name, int distance) {
 		this.name = name;
-		this.max = max;
+		this.distance = distance;
 	}
 
 	@Override
 	public void run() {
 		System.out.println(name + " start...");
-		for (int i = 0; i < max; i++) {
-			if (i<max-1) {
+		for (int i = 0; i < distance; i++) {
+			if (i<distance-1) {
 				System.out.println(name + ", finished " + (i + 1) + " loop ");
 			}
 			try {
@@ -29,7 +26,7 @@ public class Race implements Runnable {
 				e.printStackTrace();
 			}
 		}	
-		prizePlaces.add(prizePlace++, name);
+		Race.prizePlaces.add(name);
 	}
 
 	

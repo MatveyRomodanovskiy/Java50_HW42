@@ -1,15 +1,11 @@
 package telran.threads.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-
-import telran.threads.tasks.Race;
+import telran.threads.tasks.Racer;
 import telran.view.InputOutput;
 import telran.view.Item;
 import telran.view.Menu;
 import telran.view.SystemInputOutput;
-import telran.view.test.ArithmeticCalculatorAppl;
 
 public class ThreadsRaceAppl {
 	private static final int MIN_NUMBER_OF_THREADS = 3;
@@ -31,14 +27,11 @@ public class ThreadsRaceAppl {
 	static void start(InputOutput io) {
 		int[] operands = getOperands(io);
 	//	io.writeObjectLine(operands[0] + operands[1]);
-		Race[] tasks = new Race[operands[0]];
-		for (int i = 0; i < tasks.length; i++) {
-			tasks[i] = new Race("thread #" + (i + 1), operands[1]);
-			
-		}
-		Thread[] threads = new Thread[tasks.length];
+		Race race = new Race(operands[0], operands[1]);
+		
+		Thread[] threads = new Thread[race.getRacers().length];
 		for (int i = 0; i < threads.length; i++) {
-			threads[i] = new Thread(tasks[i]);
+			threads[i] = new Thread(race.getRacers()[i]);
 		}
 		for (int i = 0; i < threads.length; i++) {
 			threads[i].start();
@@ -52,10 +45,10 @@ public class ThreadsRaceAppl {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("******************");
-		System.out.println("Congratulations to " + Race.prizePlaces.get(0) + ", the winner of the race\n**********************");
-		System.out.println("List of winners");
-		Race.prizePlaces.forEach(p -> System.out.println(p));
+		io.writeObjectLine("******************");
+		io.writeObjectLine("Congratulations to " + race.getPrizePlaces().get(0) + ", the winner of the race\n**********************");
+		io.writeObjectLine("List of winners");
+		race.getPrizePlaces().forEach(p -> System.out.println(p));
 		
 	}
 	private static int[] getOperands(InputOutput io) {

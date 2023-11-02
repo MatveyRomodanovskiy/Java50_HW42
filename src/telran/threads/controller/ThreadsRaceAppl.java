@@ -30,27 +30,27 @@ public class ThreadsRaceAppl {
 		int[] operands = getOperands(io);
 		Race race = new Race(operands[0], operands[1]);
 		
-		Thread[] threads = new Thread[race.getRacers().length];
-		for (int i = 0; i < threads.length; i++) {
-			threads[i] = new Thread(race.getRacers()[i]);
-		}
-		for (int i = 0; i < threads.length; i++) {
-			threads[i].start();
+//		Thread[] threads = new Thread[race.getRacers().length];
+//		for (int i = 0; i < threads.length; i++) {
+//			threads[i] = new Thread(race.getRacers()[i]);
+//		}
+		for (int i = 0; i < race.getRacers().length; i++) {
+			race.getRacers()[i].start();
 		}
 
 
-		for (int i = 0; i < threads.length; i++) {
+		for (int i = 0; i < race.getRacers().length; i++) {
 			try {
-				threads[i].join();
+				race.getRacers()[i].join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 		io.writeObjectLine("******************");
-		io.writeObjectLine("Congratulations to " + race.getPrizePlaces()[0].getName() + ", the winner of the race\n**********************");
+		io.writeObjectLine("Congratulations to " + race.getPrizePlaces()[0].getThreadName() + ", the winner of the race\n**********************");
 		io.writeObjectLine("List of winners");
 		for(Racer racer :race.getPrizePlaces()) {
-			io.writeObjectLine(racer.getName());
+			io.writeObjectLine(racer.getThreadName());
 		}
 		
 	}

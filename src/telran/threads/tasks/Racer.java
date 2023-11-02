@@ -3,8 +3,8 @@ package telran.threads.tasks;
 import java.time.Instant;
 import java.util.*;
 
-public class Racer implements Runnable, Comparable<Racer> {
-	private String name;
+public class Racer extends Thread implements Comparable<Racer> {
+	private String nameThread;
 	private int distance;
 	static int minSleepTime = 2;
 	static int maxSleepTime = 4;
@@ -12,7 +12,7 @@ public class Racer implements Runnable, Comparable<Racer> {
 	Instant finishTime;
 	
 	public Racer(String name, int distance) {
-		this.name = name;
+		this.nameThread = name;
 		this.distance = distance;
 		
 	}
@@ -26,10 +26,10 @@ public class Racer implements Runnable, Comparable<Racer> {
 
 	@Override
 	public void run() {
-		System.out.println(name + " start...");
+		System.out.println(nameThread + " start...");
 		for (int i = 0; i < distance; i++) {
 			if (i<distance-1) {
-				System.out.println(name + ", finished " + (i + 1) + " loop ");
+				System.out.println(nameThread + ", finished " + (i + 1) + " loop ");
 			}
 			try {
 				int sleepTime = minSleepTime + random.nextInt(maxSleepTime + 1 - minSleepTime);
@@ -47,8 +47,8 @@ public class Racer implements Runnable, Comparable<Racer> {
 	/**
 	 * @return the name
 	 */
-	public String getName() {
-		return name;
+	public String getThreadName() {
+		return nameThread;
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package telran.printers.tasks;
 
 public class Printer extends Thread {
-	private static final long SLEEP_TIME = 1_000_000;
+	private static final long SLEEP_TIME = 1_000_000_000;
 	public static int portion;
 	public static int distance;
 	private int current_pos = 0;

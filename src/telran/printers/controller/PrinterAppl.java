@@ -2,7 +2,6 @@ package telran.printers.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import telran.printers.tasks.Printer;
 import telran.view.InputOutput;
@@ -45,16 +44,17 @@ public class PrinterAppl {
 		for (int i = 0; i < operands[0]; i++) {
 			Printer printer = new Printer();
 			printer.setName(i+ 1 + "");
-			printer.setDaemon(true);
 			printers.add(printer);
 		}	
 		for(Printer p : printers) {
 			int nextIndex = (Integer.parseInt(p.getName()))%operands[0];
 			p.setNextThread(printers.get(nextIndex));
-			p.start();
+			p.start();	
 		}
-		printers.get(0).interrupt();	
-		Thread.sleep(1000);
+		printers.get(0).interrupt();		
+		for(Printer p : printers) {
+			p.join();
+		}
 	}
 	
 	private static int[] getOperands(InputOutput io) {
